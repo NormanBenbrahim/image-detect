@@ -3,8 +3,13 @@
 Repo for an image detection app
 
 # First Time Usage
+
+First install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstarts)
+
+
+
 ```
-git clone https://github.com/TCE-1/TradeApp
+git clone https://github.com/NormanBenbrahim/image-detect.git
 
 cd TradeApp
 
