@@ -6,7 +6,7 @@ Youtube Tutorial: [INSERT LINK WHEN CREATED]
 
 # First Time Usage
 
-Make sure you have created a project in GCP, then
+Make sure you have created a project in GCP.
 
 1. Install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstarts), create a new project on Google Cloud and enable the Cloud APIs. **Make sure you move the `cloud-sdk` folder to your home directory** before you install it with the `install.sh` script provided by Google
 
@@ -41,3 +41,12 @@ source env_python/bin/activate
 Just make sure to not delete the `env_python` folder and run `source env_python/bin/activate` before working
 
 If you delete the folder just type the commands in step 3 again
+
+## If You Have Multiple GCP Projects
+
+Make sure you are working in the right one  
+
+```
+gcloud projects list # get project list
+gcloud config set project [PROJECT NAME]
+```
