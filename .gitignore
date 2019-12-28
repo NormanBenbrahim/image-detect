@@ -4,3 +4,5 @@ env_python/*
 python-docs-samples
 python-docs-samples/*
 .DS_STORE
+hello_world
+hello_world/*
