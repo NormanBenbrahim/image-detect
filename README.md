@@ -38,9 +38,6 @@ source env_python/bin/activate
 
 # Usage Going Forward
 
-Every time you restart your shell, make sure you type this before you start working
-```
-./setup_env.sh
-source env_python/bin/activate
-./install_dependencies.sh
-```
+Just make sure to not delete the `env_python` folder and run `source env_python/bin/activate` before working
+
+If you delete the folder just type the commands in step 3 again
