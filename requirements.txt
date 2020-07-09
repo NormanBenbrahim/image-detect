@@ -2,3 +2,6 @@ Flask
 Werkzeug
 tensorflow
 google-cloud-vision
+matplotlib
+PIL
+six
