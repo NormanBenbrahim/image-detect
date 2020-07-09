@@ -6,3 +6,4 @@ python-docs-samples/*
 .DS_STORE
 hello_world
 hello_world/*
+.gcloudignore
