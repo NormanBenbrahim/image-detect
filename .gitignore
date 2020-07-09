@@ -1,9 +1,7 @@
 lib
 env_python
-env_python/*
-python-docs-samples
-python-docs-samples/*
 .DS_STORE
-hello_world
-hello_world/*
 .gcloudignore
+sample_data
+.vscode
+venv
