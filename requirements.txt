@@ -1,0 +1,4 @@
+Flask
+Werkzeug
+tensorflow
+google-cloud-vision
