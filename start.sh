@@ -11,15 +11,14 @@ if [ ! -d "$full_path" ]; then
   exit
 fi
 
-echo "Downloading dependencies"
-pip install --upgrade
 
 if [ ! -z "${VIRTUAL_ENV}" ]; then
+  echo "Downloading dependencies"
   pip install --upgrade pip
-  pip install --upgrade gcloud
-  pip install --upgrade google-cloud-storage
   pip install -r requirements.txt
 else
   echo "Please type 'source venv/bin/activate' before installing depencencies"
   exit
 fi
+
+# TODO: add condition that checks if user has google cloud credentials
