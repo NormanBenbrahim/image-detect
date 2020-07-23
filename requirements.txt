@@ -1,7 +1,11 @@
 Flask
 Werkzeug
 tensorflow
-google-cloud-vision
+tensorflow_hub
+google-cloud-storage
+gcloud
 matplotlib
-PIL
+pillow
 six
+numpy
+ipython
