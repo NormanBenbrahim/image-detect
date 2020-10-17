@@ -5,3 +5,4 @@ env_python
 sample_data
 .vscode
 venv
+node_modules
