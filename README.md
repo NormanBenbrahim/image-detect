@@ -1,52 +1,31 @@
 # Image Detection App
 
-Repo for an image detection app built with Flask that makes use of the Vision API provided by Google, and hosted on Google Cloud Platform.
+Repo for an image detection app that downloads images from google images based on keywords passed as command line arguments, and performs a fully convolutional neural network on those image classes using Tensorflow
 
 Youtube Tutorial: [INSERT LINK WHEN CREATED]
 
-# First Time Usage
+# Setup
 
-Make sure you have created a project in GCP.
-
-1. Install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstarts), create a new project on Google Cloud and enable the Cloud APIs. **Make sure you move the `cloud-sdk` folder to your home directory** before you install it with the `install.sh` script provided by Google
-
-2. Follow [this guide](https://www.notion.so/normandatascience/Setup-Service-Account-For-Google-Vision-API-0972a21b2ce44630b7aee1466eb2b613) to setup a service account for Google Vision API 
-
-3. Type the following commands in your shell
-
+Type the following commands in your shell (you need Python 3.7+ and node 14.1+):
 
 ```
+# Step 1: clone the repo 
 git clone https://github.com/NormanBenbrahim/image-detect.git
-
 cd image-detect
 
-# this makes the scripts executable
-chmod u+x setup_env.sh
-chmod u+x install_dependencies.sh
+# Step 2: run the first script to create the virtual environment
+python3 -m venv venv
+pip install --upgrade pip
+pip install -r requirements.txt
 
-# run the first script to create the virtual environment
-./setup_env.sh
-
-# start the virtual environment
+# Step 3: start the virtual environment
 source env_python/bin/activate
 
-# install dependencies inside the virtual environment
-./install_dependencies.sh
+# Step 4: install node packages
+cd image-extract
+npm install
 ```
 
-4. Deploy the app using `gcloud app deploy`
+# Usage
 
-# Usage Going Forward
-
-Just make sure to not delete the `env_python` folder and run `source env_python/bin/activate` before working
-
-If you delete the folder just type the commands in step 3 again
-
-## If You Have Multiple GCP Projects
-
-Make sure you are working in the right one  
-
-```
-gcloud projects list # get project list
-gcloud config set project [PROJECT NAME]
-```
+**Always** make sure you're working in `venv` first. If you delete the `venv` folder just type the commands in steps 2-3 again
