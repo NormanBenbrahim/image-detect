@@ -1,6 +1,5 @@
 tensorflow
 tensorflow_hub
 numpy
-pandas
 opencv-python
 ipython
