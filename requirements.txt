@@ -4,8 +4,8 @@ tensorflow
 tensorflow_hub
 google-cloud-storage
 gcloud
-matplotlib
-pillow
-six
 numpy
+pandas
+selenium
+pattern
 ipython

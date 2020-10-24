@@ -1,43 +1,23 @@
-import datetime
-from flask import Flask, render_template
-from google.cloud import datastore
+import re, os, sys, datetime, time
+import pandas
 
-datastore_client = datastore.Client()
+# if data & logs folders don't exist, create them
+if not os.path.exists('./data/'):
+    os.makedirs('./data')
 
-###### functions for datastore
-def store_time(dt):
-    entity = datastore.Entity(key=datastore_client.key('visit'))
-    entity.update({
-        'timestamp': dt
-    })
+if not os.path.exists('./data/train-model/'):
+    os.makedirs('./data/train-model')
 
-    datastore_client.put(entity)
+if not os.path.exists('./data/logs/'):
+    os.makedirs('./data/logs')
 
-
-def fetch_times(limit):
-    query = datastore_client.query(kind='visit')
-    query.order = ['-timestamp']
-
-    times = query.fetch(limit=limit)
-
-    return times
-####### end functions for datastore
+# initialize api key
+# TODO: add to start.sh & start-local.sh
+#gcs_creds = os.environ['GCS_DEVELOPER_KEY']
+#gcs_project = os.environ['GCS_CX']
 
 
-app = Flask(__name__)
 
-
-@app.route('/')
-def root():
-    # store access time in datastore
-    store_time(datetime.datetime.now())
-
-    # fetch most 10 recent access times from datastore
-    times = fetch_times(10)
-
-    return render_template('index.html', times=times)
-
-
+ 
 if __name__ == '__main__':
-    # This is used when running locally only
-    app.run(host='127.0.0.1', port=8080, debug=True)
+    print("main")
