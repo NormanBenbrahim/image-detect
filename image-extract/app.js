@@ -126,5 +126,6 @@ async function image_extract(query) {
 
 }
 
-// parse command line arguments using process.argv[1:end]
-image_extract('litecoin coin closeup')
+// parse command line arguments
+const args = process.argv.slice(2).join(' ')
+image_extract(args)
