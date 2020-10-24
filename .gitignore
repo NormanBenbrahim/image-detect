@@ -1,8 +1,8 @@
 lib
-env_python
+__pycache__
 .DS_STORE
 .gcloudignore
-sample_data
+data
 .vscode
 venv
 node_modules
