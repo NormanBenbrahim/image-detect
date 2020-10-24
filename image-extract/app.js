@@ -7,6 +7,16 @@ const streamPipeline = util.promisify(require('stream').pipeline)
 const puppeteer = require('puppeteer')
 const scrollPageToBottom = require('puppeteer-autoscroll-down')
 
+// if the data folder doesn't exist, create it 
+if (!fs.existsSync('../data')){
+    fs.mkdirSync('../data');
+}
+
+// if images folder doesn't exist, create it 
+if (!fs.existsSync('../data/images')){
+    fs.mkdirSync('../data/images');
+}
+
 // download files if they're base64 strings, or urls
 async function download(url_src, dest) { 
     // check if the url starts with http or if it's a base64 string
@@ -82,7 +92,7 @@ async function image_extract(query) {
     await page.waitForSelector('input[name="q"]')
 
     // scroll to bottom of page
-    // this returns around 399 results per query. you can extend this to return more
+    // this returns around 398 results per query. you can extend this to return more
     // but for me that's a good enough amount for training
     const scroll_finish = await scrollPageToBottom(page, 250, 1000) // should return true
     await page.waitForTimeout()
@@ -94,15 +104,16 @@ async function image_extract(query) {
         const images = await page.evaluate(() => Array.from(document.images, e => e.src))
         var result // scope
         for (let i = 0; i < images.length; i++) {
-            //console.log(images[i])
-            result = await download(images[i], `${path}/img-${i}.png`)
+            if (i!=399) {
+                result = await download(images[i], `${path}/img-${i}.png`)
 
-            if (result === true) {
-                console.log('Success:', `${path}/img-${i}.png`, 'has been downloaded successfully.')
-            } 
-            else {
-                console.log('Error:', `${path}/img-${i}.png`, 'was not downloaded.')
-                console.error(result)
+                if (result === true) {
+                    console.log('Success:', `${path}/img-${i}.png`, 'has been downloaded successfully.')
+                } 
+                else {
+                    console.log('Error:', `${path}/img-${i}.png`, 'was not downloaded.')
+                    console.error(result)
+                }                
             }
         }
 
@@ -115,5 +126,5 @@ async function image_extract(query) {
 
 }
 
-// parse command line arguments
-image_extract('bitcoin coin closeup')
+// parse command line arguments using process.argv[1:end]
+image_extract('litecoin coin closeup')
