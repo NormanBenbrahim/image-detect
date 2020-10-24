@@ -1,11 +1,6 @@
-Flask
-Werkzeug
 tensorflow
 tensorflow_hub
-google-cloud-storage
-gcloud
 numpy
 pandas
-selenium
-pattern
+opencv-python
 ipython
