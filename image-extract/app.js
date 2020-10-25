@@ -53,7 +53,7 @@ async function image_extract(query) {
         fs.mkdirSync(path);
     }
     else {
-        console.log(`WARN:  ${path} already exists, exiting program`)
+        console.log(`ERROR:  ${path} already exists, exiting program`)
         process.exit(0)
     }
 

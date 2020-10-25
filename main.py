@@ -49,7 +49,9 @@ def prepare_data(path, train_images=300, val_images=50):
         for image in class_images[train_images:train_images+val_images]:
             copy2(os.path.join(class_path, image), class_val_dir)   
     print(f"Done, images in {shuffled_path}")
-    return True
+    
+    return shuffled_path
+
 
 # define the model
 def fcn_model(dropout_rate=0.2):
@@ -104,6 +106,50 @@ def fcn_model(dropout_rate=0.2):
     
     except Exception as e: 
         print(f"an error occured in function 'fcn_model': {e}")
+
+
+# generate image batches for variable image sizes. find the max height and width in all 
+# images and then zero pad all other images to that size
+def construct_generator(image_group, batch_size):
+    # get max image shape
+    max_shape = tuple(max(image.shape[x] for image in image_group) for x in range(3))
+
+    # construct an image batch object
+    image_batch = np.zeros((batch_size,) + max_shape, dtype='float32')
+
+    # copy all images to the upper left part of the image batch object
+    for image_index, image in enumerate(image_group):
+        image_batch[image_index, :image.shape[0], :image.shape[1], :image.shape[2]] = image
+
+    return image_batch
+
+
+# model training
+def train(model, train_generator, val_generator, epochs = 50):
+    model.compile(optimizer=tf.keras.optimizers.Adam(lr=0.0001),
+                    loss='categorical_crossentropy',
+                    metrics=['accuracy'])
+
+    checkpoint_path = './snapshots'
+    os.makedirs(checkpoint_path, exist_ok=True)
+    model_path = os.path.join(checkpoint_path, 'model_epoch_{epoch:02d}_loss_{loss:.2f}_acc_{acc:.2f}_val_loss_{val_loss:.2f}_val_acc_{val_acc:.2f}.h5')
+    
+    history = model.fit_generator(generator=train_generator,
+                                    steps_per_epoch=len(train_generator),
+                                    epochs=epochs,
+                                    callbacks=[tf.keras.callbacks.ModelCheckpoint(model_path, monitor='val_loss', save_best_only=True, verbose=1)],
+                                    validation_data=val_generator,
+                                    validation_steps=len(val_generator))
+
+    return history
+
+# finally, a run function that does all of the above in sequence
+def run(path):
+    # prepare data
+    data = prepare_data(path)
+    model = fcn_model()
+    
+
 
 if __name__ == '__main__':
     prepare_data('data/images')
