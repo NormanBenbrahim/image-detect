@@ -2,4 +2,5 @@ tensorflow
 tensorflow_hub
 numpy
 opencv-python
+Pillow
 ipython
